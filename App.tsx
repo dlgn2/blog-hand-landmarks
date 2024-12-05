@@ -102,14 +102,19 @@ function App(): React.JSX.Element {
     return <Text>No device</Text>;
   }
   return (
-    <Camera
+ /*    <Camera
       style={StyleSheet.absoluteFill}
       device={device}
       isActive={true}
       frameProcessor={frameProcessor}
       fps={30}
       pixelFormat="rgb"
-    />
+    /> */
+    <Camera
+    style={StyleSheet.absoluteFill}
+    device={device}
+    isActive={true}
+  />
   );
 }
 
