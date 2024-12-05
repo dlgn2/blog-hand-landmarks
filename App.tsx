@@ -1,5 +1,5 @@
 import {PaintStyle, Skia} from '@shopify/react-native-skia';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {StyleSheet, Text} from 'react-native';
 import {
@@ -48,10 +48,24 @@ const lines = [
 function App(): React.JSX.Element {
   const device = useCameraDevice('front');
   const {hasPermission, requestPermission} = useCameraPermission();
+  const [format, setFormat] = useState(null);
 
   useEffect(() => {
     requestPermission();
   }, [requestPermission]);
+
+  useEffect(() => {
+    if (device) {
+      const formats = device.formats.sort((a, b) => {
+        const aSize = a.photoWidth * a.photoHeight;
+        const bSize = b.photoWidth * b.photoHeight;
+        return aSize - bSize;
+      });
+
+      // En düşük çözünürlüklü format
+      setFormat(formats[0]);
+    }
+  }, [device]);
 
   const paint = Skia.Paint();
   paint.setStyle(PaintStyle.Fill);
@@ -102,19 +116,13 @@ function App(): React.JSX.Element {
     return <Text>No device</Text>;
   }
   return (
- /*    <Camera
+    <Camera
       style={StyleSheet.absoluteFill}
       device={device}
       isActive={true}
       frameProcessor={frameProcessor}
-      fps={30}
-      pixelFormat="rgb"
-    /> */
-    <Camera
-    style={StyleSheet.absoluteFill}
-    device={device}
-    isActive={true}
-  />
+      pixelFormat="yuv"
+    />
   );
 }
 
