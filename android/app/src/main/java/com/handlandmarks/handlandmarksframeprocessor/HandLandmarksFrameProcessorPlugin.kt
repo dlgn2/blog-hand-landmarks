@@ -2,6 +2,7 @@ package com.handlandmarks.handlandmarksframeprocessor
 
 import android.util.Log
 import com.google.mediapipe.framework.image.BitmapImageBuilder
+import com.google.mediapipe.framework.image.MediaImageBuilder
 import com.google.mediapipe.tasks.core.BaseOptions
 import com.google.mediapipe.tasks.vision.core.RunningMode
 import com.google.mediapipe.tasks.vision.handlandmarker.HandLandmarker
@@ -36,6 +37,8 @@ class HandLandmarksFrameProcessorPlugin(proxy: VisionCameraProxy, options: Map<S
     return try {
 
       val mpImage = BitmapImageBuilder(frame.imageProxy.toBitmap()).build()
+
+     // val mpImage2 = MediaImageBuilder(frame.image)
 
       Log.d("HandLandmarks", "timestamp: ${frame.timestamp}")
       // Process the frame in video mode

@@ -121,7 +121,7 @@ function App(): React.JSX.Element {
       device={device}
       isActive={true}
       frameProcessor={frameProcessor}
-      pixelFormat="yuv"
+      pixelFormat="rgb"
     />
   );
 }
