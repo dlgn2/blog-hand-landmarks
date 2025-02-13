@@ -31,7 +31,7 @@ import Overlay from '../assets/images/overlay.png';
 
 // Initialize the frame processor plugin
 const plugin = VisionCameraProxy.initFrameProcessorPlugin(
-  'handAndPoseLandmarks',
+  'handLandmarks',
   {}
 );
 
@@ -213,6 +213,7 @@ const Test: React.FC<{ navigation: any; route: any }> = ({
     const frameWidth = frame.width;
     const frameHeight = frame.height;
 
+    console.log('data',data)
     // Extract landmarks
     const handData = data?.handLandmarks || [];
 
@@ -310,8 +311,8 @@ const Test: React.FC<{ navigation: any; route: any }> = ({
           device={device}
           isActive={true}
           frameProcessor={frameProcessor}
-          fps={15}
-          pixelFormat="rgb"
+      
+          pixelFormat="yuv"
         />
       )}
       {showCountdown && (
